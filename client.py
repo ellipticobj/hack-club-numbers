@@ -6,16 +6,36 @@ def sendnumber(num):
     response = requests.post(SERVERURL, json={"number": num})
     
     if response.status_code == 200:
-        print("Number submitted!")
+        print("number submitted!")
     else:
-        print(f"Failed to send numbers: {response.json().get('error')}")
+        print(f"failed to send numbers: {response.json().get('error')}")
 
-def getnumber():
+def getnumbers():
     response = requests.get(SERVERURL)
     
     if response.status_code == 200:
         numbers = response.json().get('numbers', [])
-        print(f"Numbers: {numbers}")
+        return numbers
     else:
-        print(f"Failed to fetch numbers: {response.json().get('error')}")
+        print(f"failed to fetch numbers: {response.json().get('error')}")
+        return 0
 
+while True:
+    choice = input("1. enter a number\n2. view numbers\n3. exit")
+    
+    if choice == "1":
+        try:
+            number = int(input("input an integer: "))
+        except ValueError:
+            print("please input an integer")
+        
+        sendnumber(number)
+    
+    elif choice == "2":
+        getnumbers()
+    
+    elif choice == "3":
+        break
+    
+    else:
+        print("please input 1 2 or 3")
