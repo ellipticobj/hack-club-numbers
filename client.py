@@ -18,3 +18,4 @@ def getnumber():
         print(f"Numbers: {numbers}")
     else:
         print(f"Failed to fetch numbers: {response.json().get('error')}")
+
