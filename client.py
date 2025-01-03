@@ -1,8 +1,9 @@
 import requests
 
-SERVERURL = "http://luna.hackclub.com"
+SERVERURL = "http://luna.hackclub.com:8000"
 
 def sendnumber(num):
+    print("sending numbers to server...")
     response = requests.post(SERVERURL, json={"number": num})
     
     if response.status_code == 200:
@@ -11,6 +12,7 @@ def sendnumber(num):
         print(f"failed to send numbers: {response.json().get('error')}")
 
 def getnumbers():
+    print("fetching numbers from server...")
     response = requests.get(SERVERURL)
     
     if response.status_code == 200:
@@ -21,7 +23,7 @@ def getnumbers():
         return 0
 
 while True:
-    choice = input("1. enter a number\n2. view numbers\n3. exit")
+    choice = input("1. enter a number\n2. view numbers\n3. exit\n> ")
     
     if choice == "1":
         try:

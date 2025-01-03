@@ -19,8 +19,9 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/numbers', methods=["POST"])
+@app.route('/', methods=["POST"])
 def addnumber():
+    print("receiving number from client...")
     data = request.json
     number = data.get('number')
     
@@ -31,8 +32,9 @@ def addnumber():
         return jsonify({"message": "number added successfully"}), 200
     return jsonify({'error': 'no number provided'}), 400
 
-@app.route("/numbers", methods=["GET"])
+@app.route("/", methods=["GET"])
 def getnumbers():
+    print("sending numbers to client...")
     numbers = Number.query.all()
     numberslist = [num.value for num in numbers]
     return jsonify({'numbers': numberslist}), 200
